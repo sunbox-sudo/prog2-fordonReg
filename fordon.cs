@@ -14,33 +14,39 @@ enum FuelType {
 
 
 class Fordon {
-	VehicleType type;
-	FuelType fuel;
-	string regNr = "";
-	string brand = "";
-	string color = "";
-	bool isInspected = false;
+	public VehicleType Type { get; private set; }
+	public FuelType Fuel { get; private set; }
+	public string RegNr { get; private set; }
+	public string Brand { get; private set; }
+	public string Color { get; private set; }
+	public bool IsInspected { get; private set; }
 
 	Fordon(VehicleType vehicleType, FuelType fuel, string brand, string color, string regNr){
-		this.type = vehicleType;
-		this.fuel = fuel;
-		this.brand = brand;
-		this.color = color;
-		this.regNr = regNr;
+		this.Type = vehicleType;
+		this.Fuel = fuel;
+		this.Brand = brand;
+		this.Color = color;
+		this.RegNr = regNr;
 	}
 
 	void ChangeColor(string color){
-		this.color = color;
+		this.Color = color;
 	}
 
 	void ChangeInspected(){
-		if (isInspected){
-			isInspected = false;
+		if (IsInspected){
+			IsInspected = false;
 		}
 		else {
-			isInspected = true;
+			IsInspected = true;
 		}
 	}
 
-	void ChangeInspected()
+	void ChangeInspected(bool status){
+		IsInspected = status;
+	}
+
+	void ChangeRegNr(string newRegNr){
+		RegNr = newRegNr;
+	}
 }
