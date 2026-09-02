@@ -1,6 +1,7 @@
 ﻿using menu;
 using fordon;
 
+
 namespace prog2_fordonReg;
 
 class Program
@@ -17,7 +18,6 @@ class Program
 
 	public void Run()
 	{
-		Console.WriteLine(mainMenu.run());
 		while (true){
 			int option = mainMenu.run();
 
@@ -38,53 +38,80 @@ class Program
 	void addVehicle(){
 		// Methods for geting data
 		VehicleType getType(){
-			VehicleType Type = VehicleType.Car;
+			List<string> fuelNames = Enum.GetNames<VehicleType>().ToList();
 
-			//var typeMenu= new Main ("Type Menu", })
+			var typesOpts = new Menu("vehicle types", fuelNames);
 
-		return Type;
+			VehicleType type = (VehicleType)typesOpts.run();
+
+			return type;
+		}
+
+		FuelType getFuel(){
+			// converts Enums to String List
+			List<string> fuelNames = Enum.GetNames<FuelType>().ToList();
+
+			var FuelTypesOpts = new Menu("Fuel types", fuelNames);
+
+			FuelType fuel = (FuelType)FuelTypesOpts.run();
+			return fuel;
+		}
+
+		string getBrand(){
+			string brand = "Test";
+
+			Console.Clear();
+			Console.WriteLine("please enter brand of the car");
+			brand = Console.ReadLine();
+			return brand;
+		}
+
+		string getColor(){
+			string color = "red";
+
+			Console.Clear();
+			Console.WriteLine("please enter color of the car");
+			color = Console.ReadLine();
+			return color;
+		}
+
+		string getRegNr(){
+			string regNr = "ABC-123";
+
+			Console.Clear();
+			Console.WriteLine("please enter regstration number the car");
+			regNr = Console.ReadLine();
+			return regNr;
+		}
+
+		//getting data
+		VehicleType type = getType();
+		FuelType fuel = getFuel();
+		string brand = getBrand();
+		string color = getColor();
+		string regNr = getRegNr();
+
+		Fordon NewVehicles = new Fordon(type, fuel, brand, color, regNr);
+
+		FordonList.Add(NewVehicles);
+
+		return;
 	}
 
-	FuelType getFuel(){
-		List<string> fuelNames = Enum.GetNames<FuelType>().ToList();
-		fuelNames.Add("Another one");
+	// Leist all vehiclas
+	void listVehicles(){
 
-		var FuelTypesOpts = new Menu("Fuel types", fuelNames);
+		List<string> data = new();
 
-		FuelType fuel = FuelType.Diesel;
-		return fuel;
+		// func Convert List<Fordon> To List<string > icluding data
+		// 	add it to list  repet
+		foreach (Fordon curFor in FordonList){
+			data.Add($"{curFor.Type}, {curFor.Brand}, {curFor.RegNr}, {curFor.Fuel}, {curFor.Color}, Inspected {curFor.IsInspected}");
+		}
+
+		Menu listMenu = new Menu("List Menu", data);
+
+		listMenu.run();
+		return;
 	}
-
-	string getBrand(){
-		string brand = "Test";
-
-		return brand;
-	}
-
-	string getColor(){
-		string color = "red";
-
-		return color;
-	}
-
-	string getRegNr(){
-		string regNr = "ABC-123";
-		return regNr;
-	}
-
-	//getting data
-	VehicleType type = getType();
-	FuelType fuel = getFuel();
-	string brand = getBrand();
-	string color = getColor();
-	string regNr = getRegNr();
-
-	Fordon NewVehicla = new Fordon(type, fuel, brand, color, regNr);
-
-	return;
-}
-
-void listVehicles(){
-	return;
-}
 }
