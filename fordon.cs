@@ -1,12 +1,12 @@
 namespace fordon;
 
-enum VehicleType {
+public enum VehicleType {
 	Car,
 	Motorcycle,
 	Truck
 }
 
-enum FuelType {
+public enum FuelType {
 	Diesel,
 	Gasoline,
 	Electric
@@ -21,7 +21,7 @@ class Fordon {
 	public string Color { get; private set; }
 	public bool IsInspected { get; private set; }
 
-	Fordon(VehicleType vehicleType, FuelType fuel, string brand, string color, string regNr){
+	public Fordon(VehicleType vehicleType, FuelType fuel, string brand, string color, string regNr){
 		this.Type = vehicleType;
 		this.Fuel = fuel;
 		this.Brand = brand;
