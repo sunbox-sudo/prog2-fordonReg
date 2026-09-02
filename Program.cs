@@ -1,9 +1,12 @@
-﻿namespace prog2_fordonReg;
+﻿using menu;
+
+namespace prog2_fordonReg;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+	var mainMenu = new Menu("MainMenu", new List<string> { "Option 1", "Option 2" });
+	Console.WriteLine(mainMenu.run());
     }
 }
