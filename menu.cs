@@ -54,6 +54,8 @@ class Menu {
 			case ConsoleKey.Enter:
 				return index;
 		}
+		if (index < 0) index = options.Count - 1;
+		if (index > options.Count - 1) index = 0;
 		return -1;
 	}
 }
