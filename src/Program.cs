@@ -1,6 +1,5 @@
-﻿using menu;
-using fordon;
-
+﻿using fordon;
+using utils.menu;
 
 namespace prog2_fordonReg;
 
@@ -19,7 +18,7 @@ class Program
 	public void Run()
 	{
 		while (true){
-			int option = mainMenu.run();
+			int option = mainMenu.Run();
 
 			switch (option){
 				case 0:
@@ -42,7 +41,7 @@ class Program
 
 			var typesOpts = new Menu("vehicle types", fuelNames);
 
-			VehicleType type = (VehicleType)typesOpts.run();
+			VehicleType type = (VehicleType)typesOpts.Run();
 
 			return type;
 		}
@@ -53,7 +52,7 @@ class Program
 
 			var FuelTypesOpts = new Menu("Fuel types", fuelNames);
 
-			FuelType fuel = (FuelType)FuelTypesOpts.run();
+			FuelType fuel = (FuelType)FuelTypesOpts.Run();
 			return fuel;
 		}
 
@@ -111,7 +110,7 @@ class Program
 
 		Menu listMenu = new Menu("List Menu", data);
 
-		listMenu.run();
+		listMenu.Run();
 		return;
 	}
 }
