@@ -5,7 +5,7 @@ namespace prog2_fordonReg;
 
 class Program
 {
-	Menu mainMenu = new Menu("MainMenu", new List<string> { "Add vehicle", "List Vehicles" });
+	List<string> MenuOptions = new() {"Add vehicle", "List Vehicles"};
 	List<Fordon> FordonList = new();
 
 	// bootstrap
@@ -17,6 +17,8 @@ class Program
 
 	public void Run()
 	{
+		Menu mainMenu = new Menu("MainMenu", MenuOptions);
+
 		while (true){
 			int option = mainMenu.Run();
 
@@ -27,6 +29,9 @@ class Program
 				case 1:
 					listVehicles();
 					break;
+				case -1:
+					Console.Error("NO options in main menu");
+					break;
 				default:
 					Console.WriteLine("not a valid option, plz rrport the issue");
 					break;
@@ -36,33 +41,13 @@ class Program
 
 	void addVehicle(){
 		// Methods for geting data
-		VehicleType getType(){
-			List<string> fuelNames = Enum.GetNames<VehicleType>().ToList();
-
-			var typesOpts = new Menu("vehicle types", fuelNames);
-
-			VehicleType type = (VehicleType)typesOpts.Run();
-
-			return type;
-		}
-
-		FuelType getFuel(){
-			// converts Enums to String List
-			List<string> fuelNames = Enum.GetNames<FuelType>().ToList();
-
-			var FuelTypesOpts = new Menu("Fuel types", fuelNames);
-
-			FuelType fuel = (FuelType)FuelTypesOpts.Run();
-			return fuel;
-		}
-
-		string getBrand(){
-			string brand = "Test";
+		string getString(string question){
+			string foo = "";
 
 			Console.Clear();
-			Console.WriteLine("please enter brand of the car");
-			brand = Console.ReadLine();
-			return brand;
+			Console.WriteLine(question);
+			foo = Console.ReadLine();
+			return foo;
 		}
 
 		string getColor(){
@@ -74,25 +59,14 @@ class Program
 			return color;
 		}
 
-		string getRegNr(){
-			string regNr = "ABC-123";
-
-			Console.Clear();
-			Console.WriteLine("please enter regstration number the car");
-			regNr = Console.ReadLine();
-			return regNr;
-		}
-
 		//getting data
-		VehicleType type = getType();
-		FuelType fuel = getFuel();
-		string brand = getBrand();
+		string brand = ("please enter brand of the car");
 		string color = getColor();
-		string regNr = getRegNr();
+		string regNr = getString("please enter color of the car");
 
-		Fordon NewVehicles = new Fordon(type, fuel, brand, color, regNr);
+		// Fordon NewVehicles = new Car(brand, color, regNr);
 
-		FordonList.Add(NewVehicles);
+		// FordonList.Add(NewVehicles);
 
 		return;
 	}
@@ -105,7 +79,7 @@ class Program
 		// func Convert List<Fordon> To List<string > icluding data
 		// 	add it to list  repet
 		foreach (Fordon curFor in FordonList){
-			data.Add($"{curFor.Type}, {curFor.Brand}, {curFor.RegNr}, {curFor.Fuel}, {curFor.Color}, Inspected {curFor.IsInspected}");
+			data.Add($"{curFor.Brand}, {curFor.RegNr}, {curFor.Color}, Inspected {curFor.IsInspected}");
 		}
 
 		Menu listMenu = new Menu("List Menu", data);

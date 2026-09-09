@@ -1,29 +1,12 @@
 namespace fordon;
 
-public enum VehicleType {
-	Car,
-	Motorcycle,
-	Truck
-}
-
-public enum FuelType {
-	Diesel,
-	Gasoline,
-	Electric
-}
-
-
-class Fordon {
-	public VehicleType Type { get; private set; }
-	public FuelType Fuel { get; private set; }
+public abstract class Fordon {
 	public string RegNr { get; private set; }
 	public string Brand { get; private set; }
 	public string Color { get; private set; }
 	public bool IsInspected { get; private set; }
 
-	public Fordon(VehicleType vehicleType, FuelType fuel, string brand, string color, string regNr){
-		this.Type = vehicleType;
-		this.Fuel = fuel;
+	public Fordon(string brand, string color, string regNr){
 		this.Brand = brand;
 		this.Color = color;
 		this.RegNr = regNr;
@@ -48,5 +31,28 @@ class Fordon {
 
 	void ChangeRegNr(string newRegNr){
 		RegNr = newRegNr;
+
+}
+
+// error CS7036 solved with help of ai
+// I got the knowlagde of you nedeed " : base(args)"
+public class Car : Fordon{
+	int deckCount = 4;
+	float topKmph = 100;
+
+	public Car(string brand, string color, string regNr, float topKmph, int deckCount) : base(brand, color, regNr){
+		this.topKmph = topKmph;
+		this.deckCount = deckCount;
+	}
+
+}
+
+public class Boat : Fordon{
+	int propelerCount = 2;
+
+	public Boat(string brand, string color, string regNr) : base(brand, color, regNr){
 	}
 }
+
+}
+
