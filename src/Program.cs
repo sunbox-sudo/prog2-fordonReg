@@ -1,5 +1,6 @@
 ﻿using fordon;
 using utils.menu;
+using utils.debug;
 
 namespace prog2_fordonReg;
 
@@ -30,7 +31,7 @@ class Program
 					listVehicles();
 					break;
 				case -1:
-					Console.Error("NO options in main menu");
+					Debug.Critical("NO options in main menu");
 					break;
 				default:
 					Console.WriteLine("not a valid option, plz rrport the issue");
@@ -60,7 +61,7 @@ class Program
 		}
 
 		//getting data
-		string brand = ("please enter brand of the car");
+		string brand = getString("please enter brand of the car");
 		string color = getColor();
 		string regNr = getString("please enter color of the car");
 

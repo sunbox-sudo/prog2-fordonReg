@@ -32,27 +32,28 @@ public abstract class Fordon {
 	void ChangeRegNr(string newRegNr){
 		RegNr = newRegNr;
 
-}
-
-// error CS7036 solved with help of ai
-// I got the knowlagde of you nedeed " : base(args)"
-public class Car : Fordon{
-	int deckCount = 4;
-	float topKmph = 100;
-
-	public Car(string brand, string color, string regNr, float topKmph, int deckCount) : base(brand, color, regNr){
-		this.topKmph = topKmph;
-		this.deckCount = deckCount;
 	}
 
-}
+	// error CS7036 solved with help of ai
+	// I got the knowlagde of you nedeed " : base(args)"
+	public class Car : Fordon{
+		int deckCount = 4;
+		float topKmph = 100;
 
-public class Boat : Fordon{
-	int propelerCount = 2;
+		public Car(string brand, string color, string regNr, float topKmph, int deckCount) : base(brand, color, regNr){
+			this.topKmph = topKmph;
+			this.deckCount = deckCount;
+		}
 
-	public Boat(string brand, string color, string regNr) : base(brand, color, regNr){
 	}
-}
+
+	public class Boat : Fordon{
+		int PropelerCount = 2;
+
+		public Boat(string brand, string color, string regNr, int propelerCount) : base(brand, color, regNr){
+			this.PropelerCount = propelerCount;
+		}
+	}
 
 }
 
