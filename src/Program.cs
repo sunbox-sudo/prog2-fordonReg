@@ -31,6 +31,9 @@ class Program
 					listVehicles();
 					break;
 				case -1:
+					Debug.Log("MainMenu returned -1 (exited menu)");
+					break;
+				case -2:
 					Debug.Critical("NO options in main menu");
 					break;
 				default:
