@@ -34,26 +34,40 @@ public abstract class Fordon {
 
 	}
 
-	// error CS7036 solved with help of ai
-	// I got the knowlagde of you nedeed " : base(args)"
-	public class Car : Fordon{
-		int deckCount = 4;
-		float topKmph = 100;
+	public virtual void printInfo(){
+		Console.Write($"{RegNr}, {Brand}, {Color}, IsInspected: {IsInspected}");
+	}
+}
 
-		public Car(string brand, string color, string regNr, float topKmph, int deckCount) : base(brand, color, regNr){
-			this.topKmph = topKmph;
-			this.deckCount = deckCount;
-		}
+// error CS7036 solved with help of ai
+// I got the knowlagde of you nedeed " : base(args)"
+public class Car : Fordon{
+	int deckCount = 4;
+	float topKmph = 100;
 
+	public Car(string brand, string color, string regNr, float topKmph, int deckCount) : base(brand, color, regNr){
+		this.topKmph = topKmph;
+		this.deckCount = deckCount;
 	}
 
-	public class Boat : Fordon{
-		int PropelerCount = 2;
-
-		public Boat(string brand, string color, string regNr, int propelerCount) : base(brand, color, regNr){
-			this.PropelerCount = propelerCount;
-		}
-	}
+    public override void printInfo()
+    {
+        base.printInfo();
+	Console.Write($", deck: {deckCount}, top {topKmph}\n");
+    }
 
 }
 
+public class Boat : Fordon{
+	int PropelerCount = 2;
+
+	public Boat(string brand, string color, string regNr, int propelerCount) : base(brand, color, regNr){
+		this.PropelerCount = propelerCount;
+	}
+
+    public override void printInfo()
+    {
+        base.printInfo();
+	Console.Write($", Probler count:{PropelerCount}\n");
+    }
+}
