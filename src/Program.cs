@@ -1,15 +1,20 @@
-﻿using fordon;
-using utils.menu;
+﻿using System.Text.Json.Serialization;
+using System.Text.Json;
+using fordon;
 using utils.debug;
-// using utils.get;
+using utils.menu;
 
 
 namespace prog2_fordonReg;
 
 class Program
 {
+	string filePathJson = "./data.json";
+	JsonSerializerOptions jsonOpts = new JsonSerializerOptions {WriteIndented=true};
+
+
 	// should be array. and array based menu to save prefoemence
-	List<string> MenuOptions = new() {"Add vehicle", "List Vehicles"};
+	List<string> MenuOptions = new() {"Add vehicle", "List Vehicles", "Save", "Load"};
 
 
 	// Temp: fix a better suluition
@@ -42,6 +47,12 @@ class Program
 					break;
 				case 1:
 					listVehicles();
+					break;
+				case 2:
+					saveJson();
+					break;
+				case 3:
+					loadJson();
 					break;
 				case -1:
 					Debug.Log("MainMenu returned -1 (exited menu)");
@@ -165,4 +176,48 @@ class Program
 
 		Console.ReadKey();
 	}
+
+	void saveJson(){
+		Console.WriteLine("placeholder: save");
+		dataJson data = new(CarList, BoatList);
+
+		string jsonData = JsonSerializer.Serialize(data, jsonOpts);
+		StreamWriter file = File.CreateText(filePathJson);
+		file.Write(jsonData);
+		file.Close();
+	}
+
+	void loadJson(){
+		Console.WriteLine("placeholder: load");
+
+		string data = File.ReadAllText(filePathJson);
+		// FordonList = JsonSerializer.Deserialize<List<Fordon>>(data);
+
+		Console.WriteLine(data);
+		Console.ReadKey();
+
+		dataJson? foo = JsonSerializer.Deserialize<dataJson>(data);
+
+		CarList = foo?.carList ?? new List<Car>();
+		BoatList = foo?.boatList ?? new List<Boat>();
+	}
+}
+
+// AI tipsade om class
+internal class dataJson
+{
+    [JsonIgnore]
+    public List<Fordon> fordonList = new();
+    [JsonInclude]
+    public List<Car> carList = new();
+    [JsonInclude]
+    public List<Boat> boatList = new();
+
+    public dataJson() { }
+
+    internal dataJson( List<Car> carList, List<Boat> boatList)
+    {
+        this.carList = carList;
+        this.boatList = boatList;
+    }
 }
