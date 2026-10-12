@@ -66,7 +66,7 @@ public class Car : Fordon{
 
 	public override void printInfo(){
 		base.printInfo();
-		Console.Write($", deck: {deckCount}, top {topKmph}\n");
+		Console.Write($", deck: {deckCount}, top {topKmph} km/h\n");
 	}
 
 

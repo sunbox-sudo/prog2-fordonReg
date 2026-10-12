@@ -2,7 +2,7 @@
 using System.Text.Json;
 using fordon;
 using utils.debug;
-using utils.menu;
+using utils.old_menu;
 
 
 namespace prog2_fordonReg;
@@ -25,7 +25,7 @@ class Program
 
 	// move when ready
 	static List<string> TypesOpts = new() {"ALL", "Boat", "Car"};
-	Menu TypeMenu = new Menu("Type Menu", TypesOpts);
+	OldMenu TypeMenu = new OldMenu("Type Menu", TypesOpts);
 
 	// bootstrap
 	static void Main(){
@@ -36,7 +36,7 @@ class Program
 
 	public void Run()
 	{
-		Menu mainMenu = new Menu("MainMenu", MenuOptions);
+		OldMenu mainMenu = new OldMenu("MainMenu", MenuOptions);
 
 		while (true){
 			int option = mainMenu.Run();
@@ -55,7 +55,7 @@ class Program
 					loadJson();
 					break;
 				case -1:
-					Debug.Log("MainMenu returned -1 (exited menu)");
+					Debug.Info("MainMenu returned -1 (exited menu)");
 					Environment.Exit(0);
 					break;
 				case -2:
@@ -88,17 +88,26 @@ class Program
 			return color;
 		}
 
-		float getFloat(string question){
+			float getFloat(string question){
 			string foo = "";
 			float bar = 0f;
 
-			Console.Clear();
-			Console.WriteLine(question);
-			foo = Console.ReadLine();
 
-			bar = float.Parse(foo);
-			return bar;
-		}
+			while (true){
+				Console.Clear();
+				Console.WriteLine(question);
+				foo = Console.ReadLine();
+				
+				if (float.TryParse(foo, out bar))
+				{
+					return bar;
+				}
+				Console.Clear();
+				Console.WriteLine("Invalid input, you comemierda. Please enter a valid float value.");
+				Console.WriteLine("Invalid input! Press any key to try again, you absolute comemierda..");
+				Console.ReadKey();
+			}
+			}
 		int getInt(string question){
 			int foo = 3;
 			return foo;
@@ -167,6 +176,11 @@ class Program
 			case 1: //boat
 				foreach (Boat curBoat in BoatList){
 					curBoat.printInfo();
+				}
+				break;
+			case 2: //bil
+				foreach (Car curCar in CarList){
+					curCar.printInfo();
 				}
 				break;
 			default:

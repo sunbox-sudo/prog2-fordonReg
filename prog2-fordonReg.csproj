@@ -9,13 +9,10 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- stop the default glob from sweeping up the submodule -->
+		<ProjectReference Include="lib/utils/utils_dotnet.csproj" />
 		<Compile Remove="lib/**/*.cs" />
 		<Compile Remove="lib/**/obj/**" />
 		<Compile Remove="lib/**/bin/**" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="lib/utils/utils_dotnet.csproj" />
 	</ItemGroup>
 
 </Project>
