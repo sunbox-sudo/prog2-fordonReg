@@ -97,7 +97,7 @@ class Program
 				Console.Clear();
 				Console.WriteLine(question);
 				foo = Console.ReadLine();
-				
+
 				if (float.TryParse(foo, out bar))
 				{
 					return bar;
@@ -107,7 +107,7 @@ class Program
 				Console.WriteLine("Invalid input! Press any key to try again, you absolute comemierda..");
 				Console.ReadKey();
 			}
-			}
+		}
 		int getInt(string question){
 			int foo = 3;
 			return foo;
@@ -211,6 +211,9 @@ class Program
 		Console.ReadKey();
 
 		dataJson? foo = JsonSerializer.Deserialize<dataJson>(data);
+
+		CarList.Clear();
+		BoatList.Clear();
 
 		CarList = foo?.carList ?? new List<Car>();
 		BoatList = foo?.boatList ?? new List<Boat>();
